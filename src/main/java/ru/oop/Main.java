@@ -1,5 +1,7 @@
 package ru.oop;
 
+import java.util.List;
+
 /**
  * <b>Задача 2:</b><br>
  * Добраться человеку до заданного места.<br>
@@ -38,7 +40,11 @@ public class Main {
      * на любом, заранее определённом транспорте
      */
     public static void moveTo(Person person, Position destination) {
-        // TODO
+        Navigator navigator = new Navigator();
+        List<Positioned> path = navigator.getBestPath(person, destination);
+        for (Positioned positioned : path) {
+            positioned.moveTo(person);
+        }
         assert person.getPosition() == destination;
     }
 }

@@ -39,12 +39,19 @@ public class Main {
      * Переехать из текущего места в заданную точку
      * на любом, заранее определённом транспорте
      */
-    public static void moveTo(Person person, Position destination) {
-        Navigator navigator = new Navigator();
-        List<Positioned> path = navigator.getBestPath(person, destination);
-        for (Positioned positioned : path) {
-            positioned.moveTo(person);
+    public static void moveTo2(Person person, Position destination, Transport transport) {
+        person.walk(path.get(0).getPosition());
+        transport.moveTo(destination);
+        person.walk(destination);
+        assert person.getPosition() == destination;
+    }
+    public static void moveTo3(Person person, Position destination, List<Transport> path) {
+        person.walk(path.get(0).getPosition());
+        for (Positioned transport : path) {
+            person.walk(transport.getPosition());
+            transport.moveTo(destination);
         }
+        person.walk(transport.getPosition())
         assert person.getPosition() == destination;
     }
 }
